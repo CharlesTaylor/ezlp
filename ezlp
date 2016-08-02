@@ -1,0 +1,67 @@
+#!/bin/bash
+
+set -e
+for last; do true; done
+args=("$@") 
+
+if [[ $last =~ ^-?[0-9]+$ ]]
+then
+#Number iteration
+	for k in `seq 1 $last`;
+	do
+		for ((j=0; j<$#-1; j++));
+		do
+			temp=${args[j]}
+			temp=${temp//'{0}'/$k}
+			for i in `seq 1 10`;
+			do
+				#sed -i 's/{$i}/{($i-1)}/g' $j;
+			
+				temp=${temp//'{'$i'}'/'{'$[i-1]'}'}
+			done
+			cmnd="$cmnd ${temp}"
+			#echo $cmnd
+		done
+		$cmnd
+		cmnd=''
+	done
+else
+#List iteration 
+#FIX THIS
+	lt0=${last/'['/''}
+	if [ "$lt0" == "$last" ]
+	then
+		echo "Usage: ezlp [Statement] [#|[list]]"
+		exit 1
+		
+	fi
+	lt=${lt0/']'/''}
+	if [ "$lt0" == "$lt" ]
+	then
+		echo "Usage: ezlp [Statement] [#|[list]]"
+		exit 1
+	fi
+	IFS=',' read -a arr <<< "$lt"
+	for k in ${arr[@]}
+	do
+	
+		for ((j=0; j<$#-1; j++));
+		do
+			temp=${args[j]}
+			temp=${temp//'{0}'/$k}
+			for i in `seq 1 10`;
+			do
+				#sed -i 's/{$i}/{($i-1)}/g' $j;
+			
+				temp=${temp//'{'$i'}'/'{'$[i-1]'}'}
+			done
+			cmnd="$cmnd ${temp}"
+			#echo $cmnd
+		done
+		$cmnd
+		cmnd=''
+	done
+fi
+
+
+
