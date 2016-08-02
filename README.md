@@ -9,7 +9,6 @@ so how you use it
 
 setup
 -----
-remove the extension
 
 copy it to /usr/bin/
 
