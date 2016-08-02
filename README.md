@@ -35,7 +35,7 @@ this will create 2 folders called charles and taylor. cool eh?
 
 oh, also you can nest ezlp that works fine as well
 
-ezlp ezlp ezlp mkdir {0}_{1}_{2} 5 3 [charles,taylor]
+ezlp ezlp ezlp mkdir {0}\_{1}\_{2} 5 3 [charles,taylor]
 
 oh I didnt tell you, you can manage nesting with numbering the levels like {1} or {9}
 previous line will create the following dirs
